@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block sidebar %}
+    <a class = "sidebar_option" href="{{url_for('index_categories', name=name)}}">voir les categories</a>
+{% endblock %}
+{% block body %}
+<div ng-controller="ExpensesController" >
+  
+    <form class=add-entry ng-submit="create()" >
+      <dl>
+        <dt>date:
+        <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="date"/></datepicker>
+            <dt>categorie:
+        <dd><select ng-options="category.name for category in categories" ng-model="current_category"></select>
+            <dt>cout:
+        <dd><input type=text size=30 ng-model="cost"/>
+            <dt>description:
+        <dd><input type=text size=30 ng-model="description"/>
+        <dd><input type=submit value="nouvelle depense"/>
+      </dl>
+    </form>
+  {% raw %}
+  <ul class=entries>
+    <li ng-repeat="expense in expenses| orderBy : order" style="background-color:#{{categories_color[expense.category]}}">
+        <div class="list-cell left">
+             {{ expense.date }} 
+        </div>
+        <div class="list-cell left">
+             {{ expense.category }} 
+        </div>
+        <div class="list-cell left">
+             {{ expense.cost }} 
+        </div>
+        <div class="list-cell left">
+             {{ expense.description }} 
+        </div>
+        <divclass="list-cell">
+            <a href="#" ng-click="destroy(expense)">x</a>
+        </div>
+    </li>
+  </ul>
+  {% endraw %}
+  </div>
+{% endblock %}
