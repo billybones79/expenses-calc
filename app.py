@@ -12,6 +12,7 @@ import json
 import datetime
 import logging
 import time
+import os
 
 
 
@@ -196,12 +197,9 @@ def add_expense(name):
     
 
 if __name__ == '__main__':
-    # configuration
-    app.config.update(
-       DEBUG = True,
-       SECRET_KEY = '|T]>_~pz7r`]q6Tq1f%kxQoY(Ad-e-#U=g5?RO]pkgMBD&^Rt+&N(&mNGRY zo,d',
-       MONGODB_DATABASE = 'expenses'
-    )
+    # configuration 
+    app.config.from_object(os.environ['APP_SETTINGS'])
+
     
         
     db = MongoKit(app)
