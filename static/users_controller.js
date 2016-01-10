@@ -7,8 +7,8 @@
   $module.controller('UsersController', ['$scope', '$log', '$http', function($scope, $log, $http) {
 
 		$http.get('/owners').success(function(data) {
-	  		$log.log(data.results);
-	    	$scope.owners = data.results;
+	  		$log.log(data.owners);
+	    	$scope.owners = data.owners;
 	  	}).error(function(data){
 	  		$scope.messages = data;
 	  	});
@@ -16,8 +16,8 @@
 	    $scope.create = function() {
 	    	var data = {'name':$scope.name, 'password':$scope.password};
 			$http.post('/owner', data).success(function(data) {
-				$log.log(data.results);
-				$scope.owners.push(data.results);
+				$log.log(data.owner);
+				$scope.owners.push(data.owner);
 				
 			})
 		};

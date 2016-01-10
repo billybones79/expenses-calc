@@ -7,9 +7,9 @@
   $module.controller('CategoriesController', ['$scope', '$log', '$http', function($scope, $log, $http) {
 
 		$http.post(window.location.href, '').success(function(data) {
-	  		$log.log(data.results);
-	    	$scope.categories = data.results.categories;
-	    	$scope.owner = data.results.owner[0];
+	  		$log.log(data);
+	    	$scope.categories = data.categories;
+	    	$scope.owner = data.owner;
 	    	$scope.messages = data.messages;
 	  	}).error(function(data){
 	  		$scope.messages = data;
@@ -18,8 +18,8 @@
 	    $scope.create = function() {
 	    	var data = {'name':$scope.name, 'color':$scope.color};
 			$http.post('/'+$scope.owner.name+'/category', data).success(function(data) {
-				$log.log(data.results);
-				$scope.categories.push(data.results);
+				$log.log(data.category);
+				$scope.categories.push(data.category);
 				
 			})
 		};
