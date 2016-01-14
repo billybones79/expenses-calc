@@ -18,7 +18,6 @@ class ProductionConfig(Config):
     MONGODB_USERNAME =os.environ.get('OPENSHIFT_MONGODB_DB_USERNAME')
     MONGODB_PASSWORD=os.environ.get('OPENSHIFT_MONGODB_DB_PASSWORD')
     MONGODB_HOST=os.environ.get('OPENSHIFT_MONGODB_DB_HOST')
-    MONGODB_PORT=os.environ.get('OPENSHIFT_MONGODB_DB_PORT')
 
 class StagingConfig(Config):
     DEVELOPMENT = True
