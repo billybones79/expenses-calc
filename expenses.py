@@ -17,6 +17,21 @@ import os
 
 
 app = Flask(__name__)
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.debug = True
+    
+
+ADMINS = ['alexandredt79@gmail.com']
+
+import logging
+from logging.handlers import SMTPHandler
+mail_handler = SMTPHandler('smtp.gmail.com',
+                           'alexandreDT79@gmail.com',
+                           ADMINS, 'YourApplication Failed',
+                           ("alexandreDT79@gmail.com", "rxrfllxdqccrhavv")
+                           )
+mail_handler.setLevel(logging.ERROR)
+app.logger.addHandler(mail_handler)
 
 
 bcrypt = Bcrypt(app)
@@ -78,6 +93,11 @@ class Expense(Document):
         'category': unicode,
         'owner': unicode
     }  
+          
+db = MongoKit(app)
+db.register([Owner])
+db.register([Expense])
+db.register([Category])
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -198,23 +218,4 @@ def add_expense(name):
 
 if __name__ == '__main__':
     # configuration 
-    app.config.from_object(os.environ['APP_SETTINGS'])
-
-    ADMINS = ['alexandredt79@gmail.com']
-    
-    import logging
-    from logging.handlers import SMTPHandler
-    mail_handler = SMTPHandler('smtp.gmail.com',
-                               'alexandreDT79@gmail.com',
-                               ADMINS, 'YourApplication Failed',
-                               ("alexandreDT79@gmail.com", "rxrfllxdqccrhavv")
-                               )
-    mail_handler.setLevel(logging.ERROR)
-    app.logger.addHandler(mail_handler)
-    
-        
-    db = MongoKit(app)
-    db.register([Owner])
-    db.register([Expense])
-    db.register([Category])
     app.run()
