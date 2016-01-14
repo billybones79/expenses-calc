@@ -7,8 +7,11 @@ class Config(object):
 class ProductionConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    MONGODB_USERNAME ='admin'
-    MONGODB_PASSWORD="8zse_y19PsLb"
+    MONGODB_USERNAME =os.environ['OPENSHIFT_MONGODB_DB_USERNAME']
+    MONGODB_PASSWORD=os.environ['OPENSHIFT_MONGODB_DB_PASSWORD']
+    MONGODB_HOST=os.environ['OPENSHIFT_MONGODB_DB_HOST']
+    MONGODB_PORT=os.environ['OPENSHIFT_MONGODB_DB_PORT']
+    
 
 
 class StagingConfig(Config):
