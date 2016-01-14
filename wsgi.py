@@ -29,7 +29,7 @@ except IOError:
 # line, it's possible required libraries won't be in your searchable path
 #
 def application(environ, start_response):
-    from flaskapp import app as application
+    from expenses import app as application
 
 #
 #  main():
