@@ -217,4 +217,4 @@ if __name__ == '__main__':
     db.register([Owner])
     db.register([Expense])
     db.register([Category])
-    app.run(debug=True)
+    app.run()
