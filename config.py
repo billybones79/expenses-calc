@@ -6,7 +6,7 @@ class Config(object):
 
 class ProductionConfig(Config):
     DEVELOPMENT = True
-    DEBUG = False
+    DEBUG = True
     MONGODB_USERNAME ='admin'
     MONGODB_PASSWORD="8zse_y19PsLb"
 
