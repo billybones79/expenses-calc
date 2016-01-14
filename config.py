@@ -1,7 +1,7 @@
 class Config(object):
     DEBUG = False
     SECRET_KEY = 'L8IsEh26sFUbGj0FL02CUD323mrO8662'
-    MONGODB_DATABASE = 'expenses'
+    MONGODB_DATABASE = 'python'
 
 
 class ProductionConfig(Config):
