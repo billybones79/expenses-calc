@@ -8,8 +8,7 @@
 	  		$scope.expenses = data.expenses;
 	  		$scope.categories_color =[]
 	  		data.categories.forEach(function(cat)
-	  		{
-	  			
+	  		{	  			
 	  			$scope.categories_color[cat.name] = cat.color;
 	  		});
 	  		$log.log($scope.categories_color);
@@ -38,6 +37,7 @@
 				
 			})
 		}
+		$scope.initChart
   }
 
   ]);

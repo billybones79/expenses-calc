@@ -64,12 +64,25 @@ class Owner(Document):
     }
 
 class Category(Document): 
-    __collection__ = 'categories'   
+    __collection__ = 'categories'  
+    __total = None 
+    __expenses = None
     structure = {
         'name': unicode,
         'color':unicode,
         'owner':unicode
     } 
+    @property
+    def expenses(self):
+        if self .__expenses ==None:
+             self.__expenses =  db.Expense.find({"owner":self["owner"], "category":self["name"]})
+        return self.__expenses
+    @property 
+    def total(self):
+        if self.__total==None:
+            self.__total = sum(ex["cost"] for ex in self.expenses)   
+        return self.__total
+      
  
 class Expense(Document):
     __collection__ = 'expenses'
@@ -85,7 +98,7 @@ db = MongoKit(app)
 db.register([Owner])
 db.register([Expense])
 db.register([Category])
-
+    
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -142,6 +155,22 @@ def index_expenses(name):
                   "categories" : cat,
                    "expenses" : expenses
                  })
+@app.route('/<name>/expenses/charts', methods=['GET', 'POST'])
+def expenses_charts(name):
+    if not  (flask_login.current_user.is_authenticated and flask_login.current_user.id == name):
+        return flask_login.current_app.login_manager.unauthorized()()
+    app.logger.debug(request)
+    if request.mimetype != "application/json":
+        return render_template('users/expenses/charts.html', name=name)
+    owner=db.Owner.find_one({"name" : name})
+    
+    cat = db.Category.find({"owner":owner["name"]})
+    totals = {}
+    for c in cat: totals[c["name"]] = c.total
+    return dumps({ "owner" : owner, 
+                  "categories" : cat,
+                   "totals" : totals
+                 })
 
 # routes de json
 @app.route('/owners', methods=['GET'])
@@ -155,12 +184,6 @@ def add_owner():
     owner['password']=unicode(bcrypt.generate_password_hash(request.json['password']))
     owner.save()
     return  dumps({ "owner": owner})
-#@app.route('/owner/<id>', methods=['DELETE'])
-#def delete_owner(id):
-#    if not  (flask_login.current_user.is_authenticated and flask_login.current_user.id == name):
-#        return flask_login.current_app.login_manager.unauthorized()
-#    g.couch.delete(Owner.load(id))
-#    return  ""
 @app.route('/<name>/categories/<id>', methods=['DELETE'])
 def delete_category(id):
     if not  (flask_login.current_user.is_authenticated and flask_login.current_user.id == name):

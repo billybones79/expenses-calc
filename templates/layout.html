@@ -7,10 +7,14 @@
     <link href="{{ url_for('static', filename='node_modules/angularjs-datepicker/src/css/angular-datepicker.css') }}" rel="stylesheet" type="text/css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="{{ url_for('static', filename='jscolor.min.js') }}"></script>
-	   <script src="{{ url_for('static', filename='main.js') }}"></script>
+	<script src="{{ url_for('static', filename='main.js') }}"></script>
 	<script src="{{ url_for('static', filename='expenses_controller.js') }}"></script>
     <script src="{{ url_for('static', filename='users_controller.js') }}"></script>
 	<script src="{{ url_for('static', filename='categories_controller.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/d3/d3.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/nvd3/build/nv.d3.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js') }}"></script>
+    
 
 	<div class="container">
     	<div class="sidebar">
@@ -29,5 +33,5 @@
     	</div>
 	</div>
 
-   <script src={{ url_for('static', filename='node_modules/angularjs-datepicker/src/js/angular-datepicker.js') }}></script>
+   <script src="{{ url_for('static', filename='node_modules/angularjs-datepicker/src/js/angular-datepicker.js') }}"></script>
 </html>

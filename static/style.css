@@ -22,5 +22,5 @@ h2              { font-size: 1.2em; }
 .clear			{clear:both;}
 
 .sidebar		{min-height:100%;width:20%;float:left;padding: 1%; background:#90C3D4;overflow: auto; }
-.sidebar_option {text-decoration:none}
+.sidebar_option {text-decoration:none;clear:both}
 

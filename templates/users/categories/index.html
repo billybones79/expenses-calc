@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block sidebar %}
-    <a class = "sidebar_option"  href="{{url_for('index_expenses', name=name)}}">voir les depenses</a>
+<ul>
+    <li><a class = "sidebar_option"  href="{{url_for('index_expenses', name=name)}}">voir les depenses</a></li>
+    <li><a class = "sidebar_option" href="{{url_for('expenses_charts', name=name)}}">charte des depenses</a></li>
+</ul>
 {% endblock %}
 {% block body %}
 {% raw %}

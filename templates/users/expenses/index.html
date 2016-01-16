@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block sidebar %}
     <a class = "sidebar_option" href="{{url_for('index_categories', name=name)}}">voir les categories</a>
+    <a class = "sidebar_option" href="{{url_for('expenses_charts', name=name)}}">charte des depenses</a>
+   
 {% endblock %}
 {% block body %}
 <div ng-controller="ExpensesController" >
