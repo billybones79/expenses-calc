@@ -13,6 +13,7 @@ import datetime
 import logging
 import time
 import os
+import bson
 
 
 
@@ -161,11 +162,17 @@ def add_owner():
 #        return flask_login.current_app.login_manager.unauthorized()
 #    g.couch.delete(Owner.load(id))
 #    return  ""
-@app.route('/<name>/categories/<id>', methods=['DELETE'])
-def delete_category(id):
+@app.route('/<name>/categories/<ObjectId:id>', methods=['DELETE'])
+def delete_category(name, id):
     if not  (flask_login.current_user.is_authenticated and flask_login.current_user.id == name):
         return flask_login.current_app.login_manager.unauthorized()
-    Category.get(id).remove()
+    db.Category.get_from_id(id).delete()
+    return  ""
+@app.route('/<name>/expenses/<ObjectId:id>', methods=['DELETE'])
+def delete_expense(name, id):
+    if not  (flask_login.current_user.is_authenticated and flask_login.current_user.id == name):
+        return flask_login.current_app.login_manager.unauthorized()
+    db.Expense.get_from_id(id).delete()
     return  ""
 @app.route('/<name>/category', methods=['POST'])
 def add_category(name):

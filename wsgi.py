@@ -36,6 +36,7 @@ from expenses import app as application
 #
 if __name__ == '__main__':
   application = imp.load_source('app', 'expenses.py')
+  application.app.Debug = True
   port = application.app.config['PORT']
   ip = application.app.config['IP']
   app_name = application.app.config['APP_NAME']

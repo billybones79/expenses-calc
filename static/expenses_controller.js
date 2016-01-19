@@ -30,11 +30,11 @@
 				
 			})
 		};
-		$scope.destroy = function($category){
-			$log.log($owner);
-			$http.delete('/expense/'+$category._id ).success(function(data) {
+		$scope.destroy = function($expense){
+			
+			$http.delete("/"+$scope.owner.name+'/expenses/'+$expense._id.$oid ).success(function(data) {
 				
-				$scope.categories.splice($scope.categories.indexOf($category), 1);
+				$scope.expenses.splice($scope.expenses.indexOf($expenses), 1);
 				
 			})
 		}

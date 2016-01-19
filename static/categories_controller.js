@@ -24,8 +24,8 @@
 			})
 		};
 		$scope.destroy = function($category){
-			$log.log($owner);
-			$http.delete('/categories/'+$category._id ).success(function(data) {
+			
+			$http.delete('/'+$scope.owner.name+'/categories/'+$category._id.$oid ).success(function(data) {
 				
 				$scope.categories.splice($scope.categories.indexOf($category), 1);
 				
