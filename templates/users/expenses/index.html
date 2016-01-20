@@ -24,7 +24,7 @@
   <ul class=entries>
     <li ng-repeat="expense in expenses| orderBy : order" style="background-color:#{{categories_color[expense.category]}}">
         <div class="list-cell left">
-             {{ expense.date }} 
+             {{ expense.date.$date | date:"yyyy-MM-dd" }} 
         </div>
         <div class="list-cell left">
              {{ expense.category }} 

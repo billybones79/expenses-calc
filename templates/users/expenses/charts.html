@@ -3,28 +3,11 @@
     <a class = "sidebar_option" href="{{url_for('index_categories', name=name)}}">voir les categories</a>
 {% endblock %}
 {% block body %}
-<div ng-controller="ExpensesController" data-ng-init="initChartData()">
+<div ng-controller="ChartsController">
   
   {% raw %}
-  <ul class=entries>
-    <li ng-repeat="expense in expenses| orderBy : order" style="background-color:#{{categories_color[expense.category]}}">
-        <div class="list-cell left">
-             {{ expense.date }} 
-        </div>
-        <div class="list-cell left">
-             {{ expense.category }} 
-        </div>
-        <div class="list-cell left">
-             {{ expense.cost }} 
-        </div>
-        <div class="list-cell left">
-             {{ expense.description }} 
-        </div>
-        <divclass="list-cell">
-            <a href="#" ng-click="destroy(expense)">x</a>
-        </div>
-    </li>
-  </ul>
+    <nvd3 options='totalsoptions' data='totals'></nvd3>
+
   {% endraw %}
   </div>
 {% endblock %}

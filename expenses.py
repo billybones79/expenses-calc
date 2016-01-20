@@ -165,8 +165,8 @@ def expenses_charts(name):
     owner=db.Owner.find_one({"name" : name})
     
     cat = db.Category.find({"owner":owner["name"]})
-    totals = {}
-    for c in cat: totals[c["name"]] = c.total
+    totals = []
+    for c in cat: totals.insert(0,{"Key" : c["name"], "y" : c.total, "color" : "#"+c["color"]})
     return dumps({ "owner" : owner, 
                   "categories" : cat,
                    "totals" : totals
@@ -184,11 +184,24 @@ def add_owner():
     owner['password']=unicode(bcrypt.generate_password_hash(request.json['password']))
     owner.save()
     return  dumps({ "owner": owner})
-@app.route('/<name>/categories/<id>', methods=['DELETE'])
-def delete_category(id):
+
+#@app.route('/owner/<id>', methods=['DELETE'])
+#def delete_owner(id):
+#    if not  (flask_login.current_user.is_authenticated and flask_login.current_user.id == name):
+#        return flask_login.current_app.login_manager.unauthorized()
+#    g.couch.delete(Owner.load(id))
+#    return  ""
+@app.route('/<name>/categories/<ObjectId:id>', methods=['DELETE'])
+def delete_category(name, id):
     if not  (flask_login.current_user.is_authenticated and flask_login.current_user.id == name):
         return flask_login.current_app.login_manager.unauthorized()
-    Category.get(id).remove()
+    db.Category.get_from_id(id).delete()
+    return  ""
+@app.route('/<name>/expenses/<ObjectId:id>', methods=['DELETE'])
+def delete_expense(name, id):
+    if not  (flask_login.current_user.is_authenticated and flask_login.current_user.id == name):
+        return flask_login.current_app.login_manager.unauthorized()
+    db.Expense.get_from_id(id).delete()
     return  ""
 @app.route('/<name>/category', methods=['POST'])
 def add_category(name):
@@ -212,7 +225,7 @@ def add_expense(name):
     if owner == None :
         return  jsonify(messages = "L'utilisateur n'existe pas")
     
-    cat = db.Category.find_one({"owner": owner["name"]})
+    cat = db.Category.find_one({"owner": owner["name"], "name": request.json['category']})
     if cat == None :
         return  jsonify(messages = "La categorie n'existe pas")
 

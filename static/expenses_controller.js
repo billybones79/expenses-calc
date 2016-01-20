@@ -6,7 +6,7 @@
 		$http.post(window.location.href, '').success(function(data) {
 	  		$log.log(data);
 	  		$scope.expenses = data.expenses;
-	  		$scope.categories_color =[]
+	  		$scope.categories_color =[];
 	  		data.categories.forEach(function(cat)
 	  		{	  			
 	  			$scope.categories_color[cat.name] = cat.color;
@@ -29,15 +29,16 @@
 				
 			})
 		};
-		$scope.destroy = function($category){
-			$log.log($owner);
-			$http.delete('/expense/'+$category._id ).success(function(data) {
+		$scope.destroy = function($expense){
+			
+			$http.delete("/"+$scope.owner.name+'/expenses/'+$expense._id.$oid ).success(function(data) {
 				
-				$scope.categories.splice($scope.categories.indexOf($category), 1);
+				$scope.expenses.splice($scope.expenses.indexOf($expenses), 1);
 				
 			})
 		}
-		$scope.initChart
+
+
   }
 
   ]);
