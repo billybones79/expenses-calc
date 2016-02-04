@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div ng-controller="OwnersController" >
+  
+    <form class=add-entry ng-submit="create()" >
+      <dl>
+        <dt>name:
+        <dd><input type=text size=30 ng-model="name">           
+        <dt>password:</dt>
+        <dd><input type=password size=30 ng-model="password"> 
+        <dd><input type=submit value="nouvel utilisateur">
+      </dl>
+    </form>
+  {% raw %}
+  <ul class=entries>
+    <li ng-repeat="owner in owners| orderBy : 'name'">
+        <div class="list-cell">
+            <a href="/{{owner.name}}">
+                <h2>{{ owner.name }}</h2>
+            </a>
+        </div>
+        <divclass="list-cell">
+            <a href="#" ng-click="destroy(owner)">x</a>
+        </div>
+    </li>
+  </ul>
+  {% endraw %}
+  </div>
+{% endblock %}

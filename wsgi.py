@@ -29,13 +29,13 @@ except IOError:
 # line, it's possible required libraries won't be in your searchable path
 #
 
-from expenses import app as application
+from budgetcalc import app as application
 
 #
 #  main():
 #
 if __name__ == '__main__':
-  application = imp.load_source('app', 'expenses.py')
+  application = imp.load_source('app', 'budgetcalc.__init__.py')
 
   application.app.Debug = True
 
