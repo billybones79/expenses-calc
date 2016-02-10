@@ -36,7 +36,7 @@ class Category(Document):
 class CategoriesViews(MethodView):
     decorators = [get_owner]
 
-    def get(self, owner, id =None):
+    def get(self, owner=None, id =None):
         budgetcalc.app.logger.debug(request.headers["Accept"])
         if id is None:
             #if asking for json we'll ruteurn a list of categories for the current owner

@@ -2,8 +2,8 @@
 {% block sidebar %}
     
 <ul>
-    <li><a class = "sidebar_option" href="{{url_for('categories.categories', owner=owner)}}">voir les categories</a></li>
-    <li><a class = "sidebar_option" href="{{url_for('graphs.graphs', owner=owner)}}">charte des depenses</a></li>
+    <li><a class = "sidebar_option" href="{{url_for('categories.categories', owner=owner)}}">categories</a></li>
+    <li><a class = "sidebar_option" href="{{url_for('graphs.graphs', owner=owner)}}">chartes</a></li>
 </ul>
    
 {% endblock %}
@@ -24,8 +24,8 @@
       </dl>
     </form>
   {% raw %}
-  <ul class=entries>
-    <li ng-repeat="expense in expenses| orderBy : order" style="background-color:#{{categories_color[expense.category]}}">
+  <div class=entries>
+    <div ng-repeat="expense in expenses| orderBy : order" style="background-color:#{{categories_color[expense.category]}}">
         <div class="list-cell left">
              {{ expense.date.$date | date:"yyyy-MM-dd" }} 
         </div>
@@ -38,11 +38,11 @@
         <div class="list-cell left">
              {{ expense.description }} 
         </div>
-        <divclass="list-cell">
+        <div class="list-cell right">
             <a href="#" ng-click="destroy(expense)">x</a>
         </div>
-    </li>
-  </ul>
+    </div>
+  </div>
   {% endraw %}
   </div>
 {% endblock %}
