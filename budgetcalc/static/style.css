@@ -1,11 +1,11 @@
-body            { font-family: sans-serif; background: #eee; min-height:100%;}
+body            { font-family: sans-serif; background: #eee; min-height:100%; font-size:20px}
 a, h1, h2       { color: #76dcAA; text-decoration:none;}
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
 h2              { font-size: 1.2em; }
-dd			    {margin:auto;padding:0px 10px;}
-input, select	{height:30px; width:100%}
-.container		{ margin: 2em auto; padding:0%, 20%; min-height:100%;}
+dd			    {margin:auto;padding:8px 10px;}
+input, select	{height:50px; width:100%}
+.container		{ margin: 0 auto; padding:0%, 20%; min-height:100%;}
 .page           { border: 5px solid #ccc; 
                   padding: 1%; background-color:#EEE; text-align:center;min-height:100%;}
 .entries        { list-style: none;  padding: 0; margin:5px auto; }
@@ -28,22 +28,23 @@ ul li    		{ margin: 0.8em 1.2em; float:left; right:50%; position:relative }
 .clear			{clear:both;}
 
 .menu_bar		{width:100%;position:fixed;padding:10px; background:rgba(0, 0, 0, 0);z-index:100;overflow: auto; height:50px;}
-.sidebar		{width:100%;position:fixed;padding: 70px 20px 20px 20px; background:rgba(0, 0, 0, 0.70);z-index:50;overflow: auto; height:100px; display:none}
+.sidebar		{width:100%;position:fixed;left:0;top:0;padding: 70px 20px 20px 20px; background:rgba(0, 0, 0, 0.70);z-index:50;overflow: auto; height:100px; display:none}
 .sidebar_option {text-decoration:none;clear:both}
 .show_hide_sidebar{float:left; background-image:url("images/menu-icon.png");width:32px;height:32px;cursor:pointer;}
 
 @media (min-width: 1080px) {
-    html {
-        font-size: 14px;
+    body {
+        font-size:14px;
     }
     
     .entries{width:50%}
     dl{width:30%;margin:auto;}
     input, select, datepicker{height:auto;}
+}
 
 @media (max-width: 1079px) {
     html {
-        font-size: 16px;
+        font-size:16px;
     }
 }
 
