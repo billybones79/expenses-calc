@@ -32,7 +32,7 @@ ul li    		{ margin: 0.8em 1.2em; float:left; right:50%; position:relative }
 .sidebar_option {text-decoration:none;clear:both}
 .show_hide_sidebar{float:left; background-image:url("images/menu-icon.png");width:32px;height:32px;cursor:pointer;}
 
-@media (min-width: 960px) {
+@media (min-width: 1080px) {
     html {
         font-size: 14px;
     }
@@ -41,7 +41,7 @@ ul li    		{ margin: 0.8em 1.2em; float:left; right:50%; position:relative }
     dl{width:30%;margin:auto;}
     input, select, datepicker{height:auto;}
 
-@media (max-width: 959px) {
+@media (max-width: 1079px) {
     html {
         font-size: 16px;
     }
