@@ -14,16 +14,15 @@
     </form>
   {% raw %}
   <div class="container">
-      <ul class=entries>
-        <li ng-repeat="owner in owners| orderBy : 'name'">
-            <div class="list-cell left">
+      <div class=entries>
+        <div ng-repeat="owner in owners| orderBy : 'name'">
+            <div class="list-cell">
                 <a href="/{{owner.name}}">
                     <h2>{{ owner.name }}</h2>
                 </a>
             </div>
-        </li>
-        <div class="clear"></div>
-      </ul>
+        </div>
+      </div>
   </div>
   {% endraw %}
   </div>

@@ -3,30 +3,47 @@ a, h1, h2       { color: #76dcAA; text-decoration:none;}
 h1, h2          { font-family: 'Georgia', serif; margin: 0; }
 h1              { border-bottom: 2px solid #eee; }
 h2              { font-size: 1.2em; }
+dd			    {margin:auto;padding:0px 10px;}
+input, select	{height:30px; width:100%}
 .container		{ margin: 2em auto; padding:0%, 20%; min-height:100%;}
 .page           { border: 5px solid #ccc; 
                   padding: 1%; background-color:#EEE; text-align:center;min-height:100%;}
-.entries        { list-style: none; margin: 0; padding: 0; margin:auto; width:50%}
+.entries        { list-style: none;  padding: 0; margin:5px auto; }
 .entries div 	{padding:5px 0px;}
 .entries li h2  { }
 
 ul     		    { list-style: none; margin: 0; padding: 0; float: left;left: 50%;position: relative;}
 ul li    		{ margin: 0.8em 1.2em; float:left; right:50%; position:relative }
 
-.add-entry      { font-size: 0.9em; border-bottom: 1px solid #ccc; }
+.add-entry      { font-size: 0.9em; border-bottom: 1px solid #ccc; padding-bottom:5px}
 .add-entry dl   { font-weight: bold; }
 .metanav        { text-align: right; font-size: 0.8em; padding: 0.3em;
                   margin-bottom: 1em; background: #fafafa; }
 .flash          { background: #cee5F5; padding: 0.5em;
                   border: 1px solid #aacbe2; }
 .error          { background: #f0d6d6; padding: 0.5em; }
-.list-cell		{ width:20%;background-color:inherit;}
+.list-cell		{ width:20%;background-color:inherit;margin:auto;}
 .left 			{float:left;}
 .right 			{float:right;}
 .clear			{clear:both;}
 
 .menu_bar		{width:100%;position:fixed;padding:10px; background:rgba(0, 0, 0, 0);z-index:100;overflow: auto; height:50px;}
-.sidebar		{width:100%;position:fixed;padding: 70px 20px 20px 20px; background:rgba(0, 0, 0, 0.50);z-index:50;overflow: auto; height:100px; display:none}
+.sidebar		{width:100%;position:fixed;padding: 70px 20px 20px 20px; background:rgba(0, 0, 0, 0.70);z-index:50;overflow: auto; height:100px; display:none}
 .sidebar_option {text-decoration:none;clear:both}
-.show_hide_sidebar{float:left;}
+.show_hide_sidebar{float:left; background-image:url("images/menu-icon.png");width:32px;height:32px;cursor:pointer;}
+
+@media (min-width: 960px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .entries{width:50%}
+    dl{width:30%;margin:auto;}
+    input, select, datepicker{height:auto;}
+
+@media (max-width: 959px) {
+    html {
+        font-size: 16px;
+    }
+}
 
