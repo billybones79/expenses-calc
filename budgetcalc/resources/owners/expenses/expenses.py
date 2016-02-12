@@ -57,7 +57,7 @@ class ExpensesViews(MethodView):
         expense.save()
         return  dumps({"expense":expense})   
 
-    def delete(self, owner):
+    def delete(self, owner, id):
         #deleting
         budgetcalc.db.Expense.get_from_id(id).delete()
         return  ""

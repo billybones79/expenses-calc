@@ -59,7 +59,7 @@ class CategoriesViews(MethodView):
          category.save()
          return  dumps({"category":category})   
 
-    def delete(self, name):
+    def delete(self, owner, id ):
         budgetcalc.db.Category.get_from_id(id).delete()
         return  ""
 
