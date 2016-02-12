@@ -1,10 +1,4 @@
 {% extends "layout.html" %}
-{% block sidebar %}
-<ul>
-    <li><a class = "sidebar_option"  href="{{url_for('expenses.expenses', owner=owner)}}">voir les depenses</a></li>
-    <li><a class = "sidebar_option" href="{{url_for('graphs.graphs', owner=owner)}}">charte des depenses</a></li>
-</ul>
-{% endblock %}
 {% block body %}
 {% raw %}
 <div ng-controller="CategoriesController" >
