@@ -31,6 +31,7 @@ ul li    		{ margin: 0.8em 1.2em; float:left; right:50%; position:relative }
 .sidebar		{width:100%;position:fixed;left:0;top:0;padding: 70px 20px 20px 20px; background:rgba(0, 0, 0, 0.70);z-index:50;overflow: auto; height:100px; display:none}
 .sidebar_option {text-decoration:none;clear:both}
 .show_hide_sidebar{float:left; background-image:url("images/menu-icon.png");width:32px;height:32px;cursor:pointer;}
+.button, input[type="submit"] {cursor:pointer;background-color: #76dcAA; /* Green */border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;}
 
 @media (min-width: 1080px) {
     body {

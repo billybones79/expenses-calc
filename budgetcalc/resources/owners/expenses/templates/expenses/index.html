@@ -13,7 +13,7 @@
     <form class=add-entry ng-submit="create()" >
       <dl>
         <dt>date:
-        <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="date"/></datepicker>
+        <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="date" readonly/></datepicker>
             <dt>categorie:
         <dd><select ng-options="category.name for category in categories" ng-model="current_category"></select>
             <dt>cout:
@@ -41,6 +41,7 @@
         <div class="list-cell right">
             <a href="#" ng-click="destroy(expense)">x</a>
         </div>
+        <div style="clear:both"></div>
     </div>
   </div>
   {% endraw %}

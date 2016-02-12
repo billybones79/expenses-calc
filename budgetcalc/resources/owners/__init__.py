@@ -6,10 +6,6 @@ import budgetcalc
 import flask.ext.login as flask_login
 
 
-
-
-
-
 # add before child request to insure that the correct owner is logged in and exists
 def get_owner(f):    
     def decorator(*args, **kwargs):

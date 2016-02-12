@@ -24,8 +24,16 @@
 	        <div class = "show_hide_sidebar"></div>
         </div>
     	<div class="sidebar">
-        	  {% block sidebar %}
-              {% endblock %} 
+    	    <ul>
+    	         <li><a class = "sidebar_option" href="{{url_for('owners.owners')}}">index</a></li>
+    	     {% if current_user != None %}
+    	     
+                <li><a class = "sidebar_option" href="{{url_for('categories.categories', owner=current_user.id)}}">categories</a></li>
+                <li><a class = "sidebar_option" href="{{url_for('expenses.expenses', owner=current_user.id)}}">Depenses</a></li>
+                <li><a class = "sidebar_option" href="{{url_for('graphs.graphs', owner=current_user.id)}}">chartes</a></li>
+
+    	     {% endif %}
+    	     </ul>
     	</div>
     	<div class=page >
     	  <h1>Budget</h1>
