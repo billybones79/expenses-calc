@@ -6,6 +6,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort,jsonify, 
 import flask.ext.login as flask_login
 from bson.json_util import dumps
 
+
 import budgetcalc
 
 import logging
@@ -36,7 +37,7 @@ class OwnersViews(MethodView):
     def post(self):
         owner = budgetcalc.db.Owner()
         owner['name']=request.json['name']
-        owner['password']=unicode(bcrypt.generate_password_hash(request.json['password']))
+        owner['password']=unicode(budgetcalc.bcrypt.generate_password_hash(request.json['password']))
         owner.save()
         return  dumps({ "owner": owner})
 
