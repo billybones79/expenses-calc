@@ -6,6 +6,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort,jsonify, 
 import flask.ext.login as flask_login
 from bson.json_util import dumps
 from budgetcalc.resources.owners import get_owner
+import datetime
 
 import budgetcalc
 
@@ -20,7 +21,14 @@ class Category(Document):
         'name': unicode,
         'color':unicode,
         'owner':unicode
-    } 
+    }
+    def total_range(self,date_from, date_to): 
+        date_from = datetime.datetime.strptime(date_from,"%Y/%m/%d")
+        date_to = datetime.datetime.strptime(date_to,"%Y/%m/%d")
+        budgetcalc.app.logger.debug(date_from)
+        budgetcalc.app.logger.debug(date_to)
+        expenses_range = budgetcalc.db.Expense.find({"owner":self["owner"], "category":self["name"], "date":{"$gt":date_from, "$lt":date_to}})
+        return sum(ex["cost"] for ex in expenses_range)
     @property
     def expenses(self):
         if self .__expenses ==None:

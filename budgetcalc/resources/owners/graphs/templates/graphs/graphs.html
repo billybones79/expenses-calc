@@ -8,6 +8,11 @@
 {% endblock %}
 {% block body %}
 <div ng-controller="GraphsController">
+    <dt>De:
+    <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="from" readonly ngchange="loadData"/></datepicker>
+    <dt>A:
+    <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="to" readonly ngchange="loadData"/></datepicker>
+  
   
   {% raw %}
     <nvd3 options='totalsoptions' data='totals'></nvd3>

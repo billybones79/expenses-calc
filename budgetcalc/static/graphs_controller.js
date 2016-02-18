@@ -2,19 +2,21 @@
   var $module = angular.module('ExpensesApp');
   
   $module.controller('GraphsController', ['$scope', '$log', '$http', function($scope, $log, $http) {
-		$scope.order = "date";
-		$http.post(window.location.href, '').success(function(data) {
-	  		
-	  		$scope.categories_color =[];
-	  		
-  			$scope.totals =[{Key: "totaux", values:data.totals }] ;
-  			$log.log($scope.totals);
-  			$scope.initCharts();
-	    	$scope.owner = data.owner;	    	
-	  		$scope.messages = data.messages;
-	  	}).error(function(data){
-	  		$scope.messages = data.messages;
-	  	});
+
+	  	$scope.loadData = function(){
+		  	$http.post(window.location.href, {from:$scope.from, to:$scope.to}).success(function(data) {
+		  		
+		  		$scope.categories_color =[];
+	  			$scope.totals =[{Key: "totaux", values:data.totals }] ;
+	  			$log.log($scope.totals);
+	  			$scope.initCharts();
+		    	$scope.owner = data.owner;	    	
+		  		$scope.messages = data.messages;
+		  	}).error(function(data){
+		  		$scope.messages = data.messages;
+		  	});	
+	  	}
+	  	
   		$scope.initCharts = function() {
 			$scope.totalsoptions = {
 			    chart: {
@@ -46,6 +48,23 @@
 			    }
 			};
   		};
+  		
+		$scope.order = "date";
+		
+		var today = new Date();
+		var to = new Date(today.getFullYear(), today.getMonth() + 2, 1);
+		var from = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+		$scope.to = to.getFullYear()+"/"+to.getMonth()+"/"+to.getDate()
+		$scope.from = from.getFullYear()+"/"+from.getMonth()+"/"+from.getDate()
+		$scope.loadData();
+		
+		$scope.$watch("to", function(newValue, oldValue) {
+		    $scope.loadData();
+		});
+		$scope.$watch("from", function(newValue, oldValue) {
+		    $scope.loadData();
+		});
+	  	
   	}
 
   ]);
