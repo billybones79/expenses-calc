@@ -1,11 +1,7 @@
 {% extends "layout.html" %}
-{% block sidebar %}
-    
-<ul>
-    <li><a class = "sidebar_option" href="{{url_for('categories.categories', owner=owner)}}">voir les categories</a></li>
-    <li><a class = "sidebar_option" href="{{url_for('graphs.graphs', owner=owner)}}">charte des depenses</a></li>
-</ul>
-{% endblock %}
+{% block title %}
+    Chartes
+{% endblock%}
 {% block body %}
 <div ng-controller="GraphsController">
     <dt>De:
@@ -15,7 +11,9 @@
   
   
   {% raw %}
-    <nvd3 options='totalsoptions' data='totals'></nvd3>
+    <nvd3 options='totalsoptions' data='expenses'></nvd3>
+    <nvd3 options='totalsoptions' data='earnings'></nvd3>
+
 
   {% endraw %}
   </div>

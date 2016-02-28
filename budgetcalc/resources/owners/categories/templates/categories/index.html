@@ -1,4 +1,7 @@
 {% extends "layout.html" %}
+{% block title %}
+    Categories
+{% endblock%}
 {% block body %}
 {% raw %}
 <div ng-controller="CategoriesController" >
@@ -9,12 +12,20 @@
         <dd><input type=text size=30 ng-model="name">
         <dt>Couleur:
         <dd><input class='jscolor' type=text size=30 ng-model="color">
-        <dd><input type=submit value="nouvelle categorie">
+        <dt>type :
+        <dd><select name="type" ng-model="type">
+             <option value="expenses">Depense</option>
+            <option value="earnings">Entres</option>
+         </select>
+         <dd><input type=submit value="nouvelle categorie"/>
       </dl>
     </form>
   
   <div class=entries>
     <div ng-repeat="category in categories| orderBy : 'name'" style = 'background-color:#{{category.color}}'>
+         <div class="list-cell left" >
+            <h2>{{ category.type }}</h2>
+        </div>
         <div class="list-cell left" >
             <h2>{{ category.name }}</h2>
         </div>

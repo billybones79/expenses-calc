@@ -7,8 +7,10 @@ import flask.ext.login as flask_login
 from bson.json_util import dumps
 from budgetcalc.resources.owners import get_owner
 import budgetcalc
+import datetime
 from datetime import date
 import calendar
+from budgetcalc.resources.owners.categories.categories  import Category
 
 import logging
 
@@ -20,14 +22,17 @@ class GraphsViews(View):
     def dispatch_request(self, owner):
         if "json" not in  request.headers["Accept"] :
             return render_template(self.template_name, owner=g.owner["name"])
+        '''if(!request.json['from'] && !request.json['to']):'''
+            
+        date_from = datetime.datetime.strptime(request.json['from'] if request.json['from'] else date(date.today().year, date.today().month, 1),"%Y/%m/%d")        
+        date_to = datetime.datetime.strptime(request.json['to'] if request.json['to'] else date(date.today().year, date.today().month, 1), "%Y/%m/%d")
         
-        date_from = request.json['from'] if request.json['from'] else date(date.today().year, date.today().month, 1)
-        budgetcalc.app.logger.debug(calendar.monthrange(date.today().year,date.today().month))
-        date_to = request.json['to'] if request.json['to'] else date(date.today().year, date.today().month, 1)
-        cat = budgetcalc.db.Category.find({"owner":g.owner["name"],})
-        totals = []
-        for c in cat: totals.insert(0,{"Key" : c["name"], "y" : c.total_range(date_from, date_to), "color" : "#"+c["color"]})
+        date_range = {"date":{"$gt":date_from, "$lt":date_to}}
+        
+        totalsExpenses = Category.totals_by_categorie({'type': {'$ne' : "earnings"}}, date_range)
+        totalsEarnings = Category.totals_by_categorie({'type':"earnings"}, date_range)
+        
         return dumps({ "owner" : g.owner, 
-                      "categories" : cat,
-                       "totals" : totals
+                       "expenses" : totalsExpenses,
+                       "earnings" : totalsEarnings
                      })

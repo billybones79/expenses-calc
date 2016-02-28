@@ -35,8 +35,8 @@ class ExpensesViews(MethodView):
                 #would probalby want to have angular handle this itself
                 return render_template('expenses/index.html', owner=g.owner["name"])
             #dumping expenses, owner and categories in a json doc           
-            cat = budgetcalc.db.Category.find({"owner":g.owner["name"]})
-            expenses =  budgetcalc.db.Expense.find({"owner":g.owner["name"]})
+            cat = budgetcalc.db.Category.find({"owner":g.owner["name"]}).sort('name', 1)
+            expenses =  budgetcalc.db.Expense.find({"owner":g.owner["name"]}).sort('date', -1)
             return dumps({ "owner" : g.owner, 
                           "categories" : cat,
                            "expenses" : expenses

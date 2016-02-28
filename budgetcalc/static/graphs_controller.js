@@ -7,7 +7,8 @@
 		  	$http.post(window.location.href, {from:$scope.from, to:$scope.to}).success(function(data) {
 		  		
 		  		$scope.categories_color =[];
-	  			$scope.totals =[{Key: "totaux", values:data.totals }] ;
+	  			$scope.expenses =[{Key: "totaux", values:data.expenses }] ;
+	  			$scope.earnings =[{Key: "totaux", values:data.earnings }] ;
 	  			$log.log($scope.totals);
 	  			$scope.initCharts();
 		    	$scope.owner = data.owner;	    	

@@ -20,15 +20,21 @@ class Category(Document):
     structure = {
         'name': unicode,
         'color':unicode,
-        'owner':unicode
+        'owner':unicode, 
+        "type" :unicode
     }
-    def total_range(self,date_from, date_to): 
-        date_from = datetime.datetime.strptime(date_from,"%Y/%m/%d")
-        date_to = datetime.datetime.strptime(date_to,"%Y/%m/%d")
-        budgetcalc.app.logger.debug(date_from)
-        budgetcalc.app.logger.debug(date_to)
-        expenses_range = budgetcalc.db.Expense.find({"owner":self["owner"], "category":self["name"], "date":{"$gt":date_from, "$lt":date_to}})
-        return sum(ex["cost"] for ex in expenses_range)
+    @staticmethod
+    def totals_by_categorie( catCond, expCond ):
+        catCond.update( {'owner':g.owner['name']} )        
+        cat = budgetcalc.db.Category.find(catCond)
+        budgetcalc.app.logger.debug(catCond)
+        totals = []
+        for c in cat: totals.insert(0,{"Key" : c["name"], "y" : c.total_expenses(expCond), "color" : "#"+c["color"]})
+        return  totals   
+    def total_expenses(self,cond): 
+        cond.update( {"owner":self["owner"], "category":self["name"]} )
+        expenses = budgetcalc.db.Expense.find(cond)
+        return sum(ex["cost"] for ex in expenses)
     @property
     def expenses(self):
         if self .__expenses ==None:
@@ -51,7 +57,7 @@ class CategoriesViews(MethodView):
             #if not render the view
             if "json" not in  request.headers["Accept"] :
                 return render_template('categories/index.html', owner=g.owner["name"])
-            cat = budgetcalc.db.Category.find({"owner":g.owner["name"]})
+            cat = budgetcalc.db.Category.find({"owner":g.owner["name"]}).sort('type', 1)
             return dumps( { "owner" :g.owner, 
                            "categories" : cat                              
                               })
@@ -63,6 +69,7 @@ class CategoriesViews(MethodView):
          category = budgetcalc.db.Category()
          category["name"]=request.json['name']
          category["color"]=request.json['color']
+         category["type"]=request.json['type']
          category["owner"]=g.owner["name"]
          category.save()
          return  dumps({"category":category})   
