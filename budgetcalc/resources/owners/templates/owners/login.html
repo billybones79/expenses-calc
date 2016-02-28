@@ -1,4 +1,7 @@
 {% extends "layout.html" %}
+{% block title %}
+    Connexion
+{% endblock %}
 {% block body %}
 <script src="{{ url_for('static', filename='users_controller.js') }}"></script>
 <div ng-controller="UsersController" >
