@@ -27,7 +27,7 @@ class GraphsViews(View):
         date_from = datetime.datetime.strptime(request.json['from'] if request.json['from'] else date(date.today().year, date.today().month, 1),"%Y/%m/%d")        
         date_to = datetime.datetime.strptime(request.json['to'] if request.json['to'] else date(date.today().year, date.today().month, 1), "%Y/%m/%d")
         
-        date_range = {"date":{"$gt":date_from, "$lt":date_to}}
+        date_range = {"date":{"$gte":date_from, "$lt":date_to}}
         
         totalsExpenses = Category.totals_by_categorie({'type': {'$ne' : "earnings"}}, date_range)
         totalsEarnings = Category.totals_by_categorie({'type':"earnings"}, date_range)
