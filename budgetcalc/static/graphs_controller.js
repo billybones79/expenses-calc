@@ -7,6 +7,15 @@
 		  	$http.post(window.location.href, {from:$scope.from, to:$scope.to}).success(function(data) {
 		  		
 		  		$scope.categories_color =[];
+		  		$scope.expensesTotal = 0;
+		  	    angular.forEach(data.expenses,function(d, k){
+		  	    	$scope.expensesTotal +=d.y;
+		  	    });
+		  	    
+		  		$scope.earningsTotal = 0;
+		  	    angular.forEach(data.earnings, function(d, k){
+		  	    	$scope.earningsTotal +=d.y;
+		  	    });
 	  			$scope.expenses =[{Key: "totaux", values:data.expenses }] ;
 	  			$scope.earnings =[{Key: "totaux", values:data.earnings }] ;
 	  			$log.log($scope.totals);
@@ -16,7 +25,7 @@
 		  	}).error(function(data){
 		  		$scope.messages = data.messages;
 		  	});	
-	  	}
+	  	};
 	  	
   		$scope.initCharts = function() {
 			$scope.totalsoptions = {

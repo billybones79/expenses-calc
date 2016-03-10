@@ -3,18 +3,38 @@
     Chartes
 {% endblock%}
 {% block body %}
+{% raw %}
 <div ng-controller="GraphsController">
     <dt>De:
     <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="from" readonly ngchange="loadData"/></datepicker>
     <dt>A:
     <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="to" readonly ngchange="loadData"/></datepicker>
+  <br/><br/>
+     <div class="summary">
+         <div class="summary_Lines">
+             <div class ="summary_line">
+                 <div class="left">total des revenus :</div>
+                 <div class="right">{{earningsTotal}} $</div>
+             </div>
+             <div class = "operator">-</div>
+             <div class ="summary_line">
+                 <div class="left">total des depenses :</div>
+                 <div class="right">{{expensesTotal}} $</div>
+             </div>
+         </div>
+         <div class="summary_total">
+             <div class="left">total</div>
+             <div class="right">{{ earningsTotal - expensesTotal}} $</div>
+         </div>
+         
+     </div>
   
   
-  {% raw %}
     <nvd3 options='totalsoptions' data='expenses'></nvd3>
     <nvd3 options='totalsoptions' data='earnings'></nvd3>
 
 
-  {% endraw %}
+
   </div>
+    {% endraw %}
 {% endblock %}
