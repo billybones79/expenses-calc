@@ -11,7 +11,10 @@
         <dt>Nom:
         <dd><input type=text size=30 ng-model="name">
         <dt>Couleur:
-        <dd><input class='jscolor' type=text size=30 ng-model="color">
+        <dd><color-picker ng-model="color"></color-picker>
+            <input type="text"
+                ng-model="color"
+                ng-init="color = '#f05a28'">
         <dt>type :
         <dd><select name="type" ng-model="type">
              <option value="expenses">Depense</option>

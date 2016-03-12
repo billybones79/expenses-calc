@@ -22,8 +22,7 @@ class GraphsViews(View):
     def dispatch_request(self, owner):
         if "json" not in  request.headers["Accept"] :
             return render_template(self.template_name, owner=g.owner["name"])
-        '''if(!request.json['from'] && !request.json['to']):'''
-        date_range = {}
+        date_range = {"date":{}}
         
         if request.json['from']:
             date_range["date"]["$gte"]=datetime.datetime.strptime(request.json['from'], "%Y/%m/%d")
