@@ -3,8 +3,8 @@
   
   $module.controller('GraphsController', ['$scope', '$log', '$http', function($scope, $log, $http) {
 
-	  	$scope.loadData = function(){
-		  	$http.post(window.location.href, {from:$scope.from, to:$scope.to}).success(function(data) {
+	  	$scope.loadData = function( from = null, to = null){
+		  	$http.post(window.location.href, {from: from, to: to}).success(function(data) {
 		  		
 		  		$scope.categories_color =[];
 		  		$scope.expensesTotal = 0;
@@ -41,7 +41,7 @@
 			        x: function(d){ return d.Key; },
 			        y: function(d){ return d.y; },
                     color: function(d,i){
-                  		return "#"+(d.data && d.data.color)
+                  		return "#"+(d.data && d.data.color);
                 	},
 			        showValues: true,
 			        valueFormat: function(d){
@@ -64,16 +64,19 @@
 		var today = new Date();
 		var to = new Date(today.getFullYear(), today.getMonth() + 2, 1);
 		var from = new Date(today.getFullYear(), today.getMonth() + 1, 1);
-		$scope.to = to.getFullYear()+"/"+to.getMonth()+"/"+to.getDate()
-		$scope.from = from.getFullYear()+"/"+from.getMonth()+"/"+from.getDate()
-		$scope.loadData();
+		$scope.to = to.getFullYear()+"/"+to.getMonth()+"/"+to.getDate();
+		$scope.from = from.getFullYear()+"/"+from.getMonth()+"/"+from.getDate();
+		//$scope.loadData();
 		
 		$scope.$watch("to", function(newValue, oldValue) {
-		    $scope.loadData();
+		    $scope.loadData($scope.from, newValue);
 		});
 		$scope.$watch("from", function(newValue, oldValue) {
-		    $scope.loadData();
+		    $scope.loadData(newValue, $scope.to);
 		});
+		$scope.lifetime = function() {
+		    $scope.loadData();
+		};
 	  	
   	}
 

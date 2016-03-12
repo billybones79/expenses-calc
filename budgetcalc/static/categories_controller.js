@@ -5,7 +5,7 @@
   var $module = angular.module('ExpensesApp');
   
   $module.controller('CategoriesController', ['$scope', '$log', '$http', function($scope, $log, $http) {
-		$scope.color="FFFFFF"
+		$scope.color="FFFFFF";
 		$http.get(window.location.href, {headers: { 'Content-type': 'application/json' }}).success(function(data) {
 	  		$log.log(data);
 	    	$scope.categories = data.categories;
@@ -18,12 +18,12 @@
 	    $scope.create = function() {
 	    	var data = {'name':$scope.name, 'color':$scope.color, 'type':$scope.type};
 	    	$scope.name=null;
-	    	$scope.color="FFFFFF"
+	    	$scope.color="FFFFFF";
 			$http.post('/'+$scope.owner.name+'/categories/', data).success(function(data) {
 				$log.log(data.category);
-				$scope.categories.push(data.category);
+				$scope.categories.splice(0, 0, data.category);
 				
-			})
+			});
 		};
 		$scope.destroy = function($category){
 			
@@ -31,8 +31,8 @@
 				
 				$scope.categories.splice($scope.categories.indexOf($category), 1);
 				
-			})
-		}
+			});
+		};
   }
 
   ]);

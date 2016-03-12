@@ -5,10 +5,14 @@
 {% block body %}
 {% raw %}
 <div ng-controller="GraphsController">
-    <dt>De:
-    <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="from" readonly ngchange="loadData"/></datepicker>
-    <dt>A:
-    <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="to" readonly ngchange="loadData"/></datepicker>
+    <dl>
+    
+        <dt>De:
+        <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="from" readonly ngchange="loadData"/></datepicker>
+        <dt>A:
+        <dd><datepicker date-format="y/M/d"><input type=text class="datepicker" size=30 ng-model="to" readonly ngchange="loadData"/></datepicker>
+        <a href="#" ng-click="lifetime()">Satistiques a vie</a>
+    </dl>
   <br/><br/>
      <div class="summary">
          <div class="summary_Lines">

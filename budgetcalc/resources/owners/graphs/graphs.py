@@ -23,11 +23,12 @@ class GraphsViews(View):
         if "json" not in  request.headers["Accept"] :
             return render_template(self.template_name, owner=g.owner["name"])
         '''if(!request.json['from'] && !request.json['to']):'''
-            
-        date_from = datetime.datetime.strptime(request.json['from'] if request.json['from'] else date(date.today().year, date.today().month, 1),"%Y/%m/%d")        
-        date_to = datetime.datetime.strptime(request.json['to'] if request.json['to'] else date(date.today().year, date.today().month, 1), "%Y/%m/%d")
+        date_range = {}
         
-        date_range = {"date":{"$gte":date_from, "$lt":date_to}}
+        if request.json['from']:
+            date_range["date"]["$gte"]=datetime.datetime.strptime(request.json['from'], "%Y/%m/%d")
+        if request.json['to']:                                                     
+            date_range["date"]["$lt"]=datetime.datetime.strptime(request.json['to'], "%Y/%m/%d")
         
         totalsExpenses = Category.totals_by_categorie({'type': {'$ne' : "earnings"}}, date_range)
         totalsEarnings = Category.totals_by_categorie({'type':"earnings"}, date_range)
