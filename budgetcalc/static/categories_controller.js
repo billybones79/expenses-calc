@@ -16,9 +16,9 @@
 	  	});
 	  
 	    $scope.create = function() {
-	    	var data = {'name':$scope.name, 'color':$scope.color, 'type':$scope.type};
+	    	var data = {'name':$scope.name, 'color':$scope.color.slice(1,7), 'type':$scope.type};
 	    	$scope.name=null;
-	    	$scope.color="FFFFFF";
+	    	$scope.color="#FFFFFF";
 			$http.post('/'+$scope.owner.name+'/categories/', data).success(function(data) {
 				$log.log(data.category);
 				$scope.categories.splice(0, 0, data.category);

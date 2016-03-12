@@ -7,7 +7,9 @@
     "angular-nvd3": "~1.0.5",
     "angularjs-datepicker": "~0.2.16",
     "nvd3": "~1.8.1",
-    "d3": "~3.5.12"
+    "d3": "~3.5.12",
+    "angular-bootstrap-colorpicker": "~3.0.24",
+    "angular-color-picker": "~1.0.10"
   },
   "devDependencies": {},
   "scripts": {
