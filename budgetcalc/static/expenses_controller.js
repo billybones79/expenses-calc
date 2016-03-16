@@ -25,18 +25,18 @@
 	    	"description":$scope.description, "date":$scope.date};
 			$http.post('/'+$scope.owner.name+'/expenses/', data).success(function(data) {
 				$log.log(data.expense);
-				$scope.expenses.push(data.expense);
+				$scope.expenses.splice(0,0,data.expense);
 				
-			})
+			});
 		};
 		$scope.destroy = function($expense){
 			
 			$http.delete("/"+$scope.owner.name+'/expenses/'+$expense._id.$oid+'/' ).success(function(data) {
 				
-				$scope.expenses.splice($scope.expenses.indexOf($expenses), 1);
+				$scope.expenses.splice($scope.expenses.indexOf($expense), 1);
 				
-			})
-		}
+			});
+		};
 
 
   }

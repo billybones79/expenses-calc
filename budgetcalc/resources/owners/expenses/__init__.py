@@ -12,4 +12,4 @@ expenses_view = expenses.ExpensesViews.as_view('expenses')
     
 expenses_blueprint.add_url_rule('/',view_func=expenses_view, methods=['GET'])
 expenses_blueprint.add_url_rule('/', view_func=expenses_view, methods=['POST'])
-expenses_blueprint.add_url_rule('/<ObjectId:id>', view_func=expenses_view, methods=['PUT', 'DELETE'])
+expenses_blueprint.add_url_rule('/<ObjectId:id>/', view_func=expenses_view, methods=['PUT', 'DELETE'])
