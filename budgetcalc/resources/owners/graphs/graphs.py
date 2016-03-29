@@ -25,10 +25,10 @@ class GraphsViews(View):
         date_range = {}
         
         if request.json['from']:
-            date_range["date"]["$gte"]=datetime.datetime.strptime(request.json['from'], "%Y/%m/%d")
+            date_range["$gte"]=datetime.datetime.strptime(request.json['from'], "%Y/%m/%d")
         if request.json['to']:                                                     
-            date_range["date"]["$lt"]=datetime.datetime.strptime(request.json['to'], "%Y/%m/%d")
-            
+            date_range["$lt"]=datetime.datetime.strptime(request.json['to'], "%Y/%m/%d")
+        cond =   {} if date_range=={} else {"date" : date_range}     
         budgetcalc.app.logger.debug(date_range)
         totalsExpenses = Category.totals_by_categorie({'type': {'$ne' : "earnings"}}, date_range)
         totalsEarnings = Category.totals_by_categorie({'type':"earnings"}, date_range)
